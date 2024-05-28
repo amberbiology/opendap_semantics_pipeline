@@ -75,7 +75,7 @@ class SolrBulkJob():
         print ('Querying: {0}'.format(url))
 
         if req.status_code != 200:
-            print '\tFailed request ({0}): {1}'.format(req.status_code, url)
+            print ( '\tFailed request ({0}): {1}'.format(req.status_code, url))
 
         return req.json()
 
@@ -89,7 +89,7 @@ class SolrBulkJob():
                     f.write(json.dumps(doc, indent=4))
 
     def run(self):
-        for offset in xrange(self.start, self.end, self.interval):
+        for offset in range(self.start, self.end, self.interval):
             query = self._generate_query(self.interval, offset)
             contents = self._query(query)
             self._parse_contents(contents)
