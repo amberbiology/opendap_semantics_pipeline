@@ -13,7 +13,7 @@ mainly, parse the yaml configuration file
 
 def parse_yaml(yaml_file):
     with open(yaml_file, 'r') as f:
-        y = yaml.load(f.read())
+        y = yaml.safe_load(f.read())
     return y
 
 

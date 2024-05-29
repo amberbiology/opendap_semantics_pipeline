@@ -21,7 +21,7 @@ class ParseWorkflow(luigi.Task):
 
     def run(self):
         self._configure()
-        print 'running'
+        print ('running')
 
     def _configure(self):
         config = parse_yaml(self.yaml_file)

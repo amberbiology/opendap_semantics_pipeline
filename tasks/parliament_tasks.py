@@ -1,8 +1,8 @@
 import luigi
 from tasks.parse_tasks import TripleTask
-from task_helpers import parse_yaml, extract_task_config
-from task_helpers import generate_output_filename
-from task_helpers import read_data
+from tasks.task_helpers import parse_yaml, extract_task_config
+from tasks.task_helpers import generate_output_filename
+from tasks.task_helpers import read_data
 from rdflib.plugins.stores import sparqlstore
 from rdflib import Graph, URIRef
 

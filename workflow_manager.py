@@ -63,7 +63,7 @@ def main():
     except AttributeError:
         op.error('Unable to load workflow for {0}'.format(options.workflow))
 
-    for i in xrange(start_index, end_index, interval):
+    for i in range(start_index, end_index, interval):
         w = workflow_class(
             doc_dir=options.directory,
             yaml_file=options.config,
