@@ -182,7 +182,7 @@ class IdentifyTask(luigi.Task):
                 raise Exception('identifier file list not found')
 
     def process_response(self, data):
-        content = data['content'].encode('unicode_escape')
+        content = data['content'].encode('unicode_escape').decode()
         url = data['url']
 
         identify = Identify(
