@@ -184,13 +184,16 @@ class IdentifyTask(luigi.Task):
     def process_response(self, data):
         content = data['content'].encode('unicode_escape').decode()
         url = data['url']
+        response_datatype = data['response_datatype']
 
         identify = Identify(
             self.identifiers,
             content,
-            url
+            url,
+            response_datatype
         )
         data['identity'] = identify.identify()
+
         return data
 
 
@@ -255,7 +258,10 @@ class ParseTask(luigi.Task):
         if not processor:
             return {}
 
-        description = processor.reader.description
+        try:
+            description = processor.reader.description
+        except AttributeError:
+            description = None
 
         # drop the source for a decent non-xml embedded in my json file
         del data['content']
