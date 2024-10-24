@@ -238,10 +238,13 @@ class ParseTask(luigi.Task):
         content = data['content'].encode('unicode_escape')
         url = data['url']
         identity = data['identity']
+        process_unidentified = self.params.get('process_unidentified', False)
+
+        print("process_unidentified:", process_unidentified)
 
         to_exclude = self.params.get('exclude', [])
         protocol = next(iter(identity), {}).get('protocol')
-        if not protocol or protocol in to_exclude:
+        if (not protocol or protocol in to_exclude) and (not process_unidentified):
             return {}
 
         harvest_details = {
@@ -255,7 +258,7 @@ class ParseTask(luigi.Task):
             harvest_details,
             **{"parse_as_xml": self.params.get('parse_as_xml', False)}
         )
-        if not processor:
+        if not processor and not process_unidentified:
             return {}
 
         try:

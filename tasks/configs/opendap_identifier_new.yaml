@@ -1,0 +1,95 @@
+- name: OPeNDAP
+  dataset:
+    - name: NCML
+      filters:
+        ands:
+          - type: simple
+            object: content
+            value: 'http://xml.opendap.org/ns/DAP'
+          - type: simple
+            object: content
+            value: 'http://www.unidata.ucar.edu/namespaces/netcdf/ncml-'
+          - type: xpath
+            object: content
+            value: '/*[local-name()="netcdf"]'
+      errors:
+        # this is not technically an error but it is 
+        # an invalid service response
+        filters:
+          ors:
+            - type: simple
+              object: content
+              value: '<property name="requires_authorization"'
+            - type: simple
+              object: content
+              value: '<variables vocabulary='
+            - type: simple
+              object: content
+              value: '<dap:Error'
+            - type: xpath
+              object: content
+              value: '/*[local-name()="Error"]'
+  metadata:
+
+    - name: DAS
+      filters:
+        ors:
+          - type: regex
+            object: content
+            # this is the version where the DAS embedded in the HTML            
+            value: '<pre[^>]+>[ ]*Attributes {'
+
+    - name: DAS
+      filters:
+        ands:
+          - type: regex
+            object: url
+            value: '.das$'
+          - type: regex
+            object: content
+            value: '^Attributes {'
+
+    - name: DDS
+      filters:
+        ors:
+          - type: regex
+            object: content
+            # this is the version where the DDS embedded in the HTML
+            value: '<pre[^>]+>[ ]*Dataset {'
+            
+    - name: DDS
+      filters:
+        ands:
+          - type: regex
+            object: url
+            value: '.dds$'
+          - type: regex
+            object: content
+            value: '^Dataset {'
+            
+    - name: DMR
+      filters:
+        ands:
+          - type: simple
+            object: content
+            value: 'http://xml.opendap.org/ns/DAP'
+          - type: xpath
+            object: content
+            value: '/*[local-name()="Dataset"]'
+      errors:
+        # this is not technically an error but it is 
+        # an invalid service response
+        filters:
+          ors:
+            - type: simple
+              object: content
+              value: '<property name="requires_authorization"'
+            - type: simple
+              object: content
+              value: '<variables vocabulary='
+            - type: simple
+              object: content
+              value: '<dap:Error'
+            - type: xpath
+              object: content
+              value: '/*[local-name()="Error"]'
