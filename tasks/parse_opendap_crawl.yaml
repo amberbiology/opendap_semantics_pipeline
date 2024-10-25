@@ -1,0 +1,29 @@
+init:
+  # clear_output_directories: true
+
+Clean:
+  output_directory: 'opendap_workflow_output/solr/clean'
+    
+Identify:
+  params:
+    identifiers:
+      - rdf_identifier.yaml
+      - ogc_identifier.yaml
+      - opensearch_identifier.yaml
+      - iso_identifier.yaml
+      - oaipmh_identifier.yaml
+      - thredds_identifier.yaml
+      - opendap_identifier_new.yaml
+      - dc_identifier.yaml
+      - dif_identifier.yaml
+      - fgdc_identifier.yaml
+      - extra_identifier.yaml
+      - wadl_identifier.yaml
+      - wsdl_identifier.yaml
+    
+  output_directory: 'opendap_workflow_output/solr/identify'
+
+Parse:
+  output_directory: 'opendap_workflow_output/solr/parse'
+  params:
+    process_unidentified: true
