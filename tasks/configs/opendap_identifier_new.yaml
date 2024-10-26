@@ -37,7 +37,7 @@
           - type: regex
             object: content
             # this is the version where the DAS embedded in the HTML            
-            value: '<pre[^>]+>[ ]*Attributes {'
+            value: '<pre[^>]*>\s*Attributes\s*{'
 
     - name: DAS
       filters:
@@ -47,7 +47,7 @@
             value: '.das$'
           - type: regex
             object: content
-            value: '^Attributes {'
+            value: '^Attributes\s*{'
 
     - name: DDS
       filters:
@@ -55,7 +55,7 @@
           - type: regex
             object: content
             # this is the version where the DDS embedded in the HTML
-            value: '<pre[^>]+>[ ]*Dataset {'
+            value: '<pre[^>]*>\s*Dataset\s*{'
             
     - name: DDS
       filters:
@@ -65,7 +65,7 @@
             value: '.dds$'
           - type: regex
             object: content
-            value: '^Dataset {'
+            value: '^Dataset\s*{'
             
     - name: DMR
       filters:
