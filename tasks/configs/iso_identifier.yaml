@@ -28,6 +28,15 @@
             filters:
               - type: xpath
                 object: content
+                value: '/*[local-name() = "MD_Metadata"]'
+              - type: simple
+                object: content
+                value: 'xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0'
+          - type: complex
+            operator: ands
+            filters:
+              - type: xpath
+                object: content
                 value: '/*[local-name() = "MI_Metadata"]'
               - type: simple
                 object: content
